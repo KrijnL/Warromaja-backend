@@ -1,5 +1,6 @@
 // const Sequelize = require('sequelize')
 module.exports = function (app, models) {
+  // Routes
   app.get('/users', (req, res) => {
     getUsers(req, res)
   })
@@ -8,6 +9,7 @@ module.exports = function (app, models) {
     createUser(req, res)
   })
 
+  // Function definitions
   const createUser = (req, res) => {
     // TODO: secure this call
     models.user.create(req.body)
@@ -16,8 +18,6 @@ module.exports = function (app, models) {
 
   const getUsers = (req, res) => {
     models.user.findAll().then(users => res.status(200).json(users))
-    // db.query('SELECT * FROM mockusers ORDER BY id ASC', { type: Sequelize.QueryTypes.SELECT })
-    //   .then(users => res.status(200).json(users))
-    //   .catch(err => console.log(err))
+      .catch(res.send('The resource could not be found'))
   }
 }

@@ -48,7 +48,7 @@ song.belongsToMany(album, { through: 'tracklist' })
 albumCategory.hasMany(album)
 
 // Sync
-sequelize.sync({ force: true })
+sequelize.sync()
   .then(() => {
     console.log('Database & tables created.')
   })

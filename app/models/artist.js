@@ -1,5 +1,5 @@
 module.exports = function (sequelize, type) {
-  var Artist = sequelize.define('Artist', {
+  var Artist = sequelize.define('artist', {
     name: {
       type: type.STRING,
       allowNull: false
