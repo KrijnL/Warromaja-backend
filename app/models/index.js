@@ -9,6 +9,9 @@ const artistModel = require('./artist')
 const albumModel = require('./album')
 const songModel = require('./song')
 const albumCatModel = require('./albumCategory')
+const productModel = require('./product')
+const orderModel = require('./order')
+const productCatModel = require('./productCategory')
 
 var config = require('../../config/db')
 
@@ -39,6 +42,9 @@ const artist = artistModel(sequelize, Sequelize)
 const album = albumModel(sequelize, Sequelize)
 const song = songModel(sequelize, Sequelize)
 const albumCategory = albumCatModel(sequelize, Sequelize)
+const product = productModel(sequelize, Sequelize)
+const order = orderModel(sequelize, Sequelize)
+const productCategory = productCatModel(sequelize, Sequelize)
 
 // Associations
 artist.belongsToMany(song, { through: 'songArtists' })
@@ -46,6 +52,10 @@ song.belongsToMany(artist, { through: 'songArtists' })
 album.belongsToMany(song, { through: 'tracklist' })
 song.belongsToMany(album, { through: 'tracklist' })
 albumCategory.hasMany(album)
+product.belongsToMany(order)
+order.belongsToMany(product)
+productCategory.hasMany(product)
+user.hasMany(order)
 
 // Sync
 sequelize.sync()
@@ -58,5 +68,8 @@ module.exports = {
   artist,
   album,
   song,
-  albumCategory
+  albumCategory,
+  product,
+  order,
+  productCategory
 }
